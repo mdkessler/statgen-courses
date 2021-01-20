@@ -8,7 +8,7 @@ RUN R --slave -e 'remotes::install_github("stephenslab/susieR")'
 
 RUN mkdir -p /usr/local/lib/statgen
 
-RUN echo "#!/bin/bash \n\
+RUN echo -e '#!/bin/bash \n\
 \n\
 cd ~jovyan \n\
 \n\
@@ -21,7 +21,7 @@ if [ ! -f .firstrun ] ; then \n\
 \n\
   touch .firstrun \n\
 fi \n\
-" > /usr/local/lib/statgen/boot.sh
+' > /usr/local/lib/statgen/boot.sh
 
 RUN chmod 0755 /usr/local/lib/statgen/boot.sh
 
