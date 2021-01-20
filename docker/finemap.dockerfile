@@ -11,6 +11,8 @@ RUN echo "#!/bin/bash \n\
 cd ~jovyan \n\
 \n\
 curl -fsSL https://raw.githubusercontent.com/statgenetics/statgen-courses/master/handout/finemapping.pdf -o finemapping.pdf \n\
+curl -fsSL https://raw.githubusercontent.com/statgenetics/statgen-courses/master/notebooks/finemapping.ipynb -o finemapping.ipynb \n\
+jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace finemapping.ipynb \n\
 \n\
 chown -R jovyan.jovyan ~jovyan \n\
 \n\
@@ -20,14 +22,3 @@ rm $(readlink -f $0)\n\
 RUN chmod 0755 boot.sh
 
 ENTRYPOINT ["/root/boot.sh"]
-
-    
-USER jovyan
-
-# Download notebook script and clean up output in the notebook
-ARG DUMMY=unknown
-RUN DUMMY=${DUMMY} curl -fsSL https://raw.githubusercontent.com/statgenetics/statgen-courses/master/notebooks/finemapping.ipynb -o finemapping.ipynb
-RUN jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace finemapping.ipynb
-
-
-
